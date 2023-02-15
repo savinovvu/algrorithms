@@ -1,4 +1,4 @@
-package ru.inbox.savinov_vu.leetcode.l1twosum;
+package ru.inbox.savinovvu.leetcode.l1twosum;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

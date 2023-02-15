@@ -1,4 +1,4 @@
-package ru.inbox.savinov_vu.leetcode.l1524odds;
+package ru.inbox.savinovvu.leetcode.l1524odds;
 
 class Solution {
 
