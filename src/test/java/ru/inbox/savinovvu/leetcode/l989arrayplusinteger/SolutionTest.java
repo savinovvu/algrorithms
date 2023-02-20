@@ -19,13 +19,13 @@ class SolutionTest {
 
   public static Stream<Arguments> getParams() {
     return Stream.of(
-        Arguments.of(new int[]{1, 2, 8, 5}, 34, List.of(1, 3, 1, 9))
-//        Arguments.of(new int[]{2, 7, 4}, 181, List.of(4,5,5)),
-//        Arguments.of(new int[]{2, 1, 5}, 806, List.of(1,0,2,1)),
-//        Arguments.of(new int[]{0}, 123, List.of(1,2,3)),
-//        Arguments.of(new int[]{1,2,3}, 0, List.of(1,2,3)),
-//        Arguments.of(new int[]{9,9,9,9,9,9,9,9,9,9}, 1, List.of(1,0,0,0,0,0,0,0,0,0,0)),
-//        Arguments.of(new int[]{1,2,6,3,0,7,1,7,1,9,7,5,6,6,4,4,0,0,6,3}, 516, List.of(1,2,6,3,0,7,1,7,1,9,7,5,6,6,4,4,0,5,7,9))
+        Arguments.of(new int[]{1, 2, 8, 5}, 34, List.of(1, 3, 1, 9)),
+        Arguments.of(new int[]{2, 7, 4}, 181, List.of(4,5,5)),
+        Arguments.of(new int[]{2, 1, 5}, 806, List.of(1,0,2,1)),
+        Arguments.of(new int[]{0}, 123, List.of(1,2,3)),
+        Arguments.of(new int[]{1,2,3}, 0, List.of(1,2,3)),
+        Arguments.of(new int[]{9,9,9,9,9,9,9,9,9,9}, 1, List.of(1,0,0,0,0,0,0,0,0,0,0)),
+        Arguments.of(new int[]{1,2,6,3,0,7,1,7,1,9,7,5,6,6,4,4,0,0,6,3}, 516, List.of(1,2,6,3,0,7,1,7,1,9,7,5,6,6,4,4,0,5,7,9))
     );
 
   }
