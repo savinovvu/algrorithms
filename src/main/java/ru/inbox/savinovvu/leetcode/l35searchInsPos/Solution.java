@@ -1,5 +1,6 @@
 package ru.inbox.savinovvu.leetcode.l35searchInsPos;
 
+// https://leetcode.com/problems/search-insert-position/solutions/3208460/fastest-java-solution/
 class Solution {
   public int searchInsert(int[] nums, int target) {
     int start = 0;
