@@ -10,4 +10,8 @@ class SolutionTest {
   public void test1() {
     assertThat(1).isEqualTo(1);
   }
+  @Test
+  public void test2() {
+    assertThat(1).isEqualTo(1);
+  }
 }
