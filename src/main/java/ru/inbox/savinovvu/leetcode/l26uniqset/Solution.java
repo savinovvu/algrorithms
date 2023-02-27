@@ -4,6 +4,19 @@ package ru.inbox.savinovvu.leetcode.l26uniqset;
 class Solution {
 
   public int removeDuplicates(int[] nums) {
-    return 0;
+    if (nums.length == 0) {
+      return 0;
+    }
+
+    int currIdx = 1;
+
+    for (int i = 0; i < nums.length - 1; i++) {
+
+      if (nums[i] < nums[i + 1]) {
+        nums[currIdx] = nums[i+1];
+        currIdx++;
+      }
+    }
+    return currIdx;
   }
 }

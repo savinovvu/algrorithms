@@ -8,10 +8,12 @@ class SolutionTest {
 
   @Test
   public void test1() {
-    assertThat(1).isEqualTo(1);
+    int res = 1;
+    assertThat(res).isEqualTo(1);
   }
   @Test
   public void test2() {
-    assertThat(1).isEqualTo(1);
+    int res = 1;
+    assertThat(res).isEqualTo(1);
   }
 }

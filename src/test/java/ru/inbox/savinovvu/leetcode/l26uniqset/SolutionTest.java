@@ -8,10 +8,8 @@ class SolutionTest {
 
   @Test
   public void test1() {
-    assertThat(1).isEqualTo(1);
-  }
-  @Test
-  public void test2() {
-    assertThat(1).isEqualTo(1);
+    int[] nums = {1, 1, 2};
+    int i = new Solution().removeDuplicates(nums);
+    assertThat(i).isEqualTo(2);
   }
 }
