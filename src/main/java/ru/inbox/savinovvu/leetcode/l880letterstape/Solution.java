@@ -8,27 +8,26 @@ class Solution {
     Node node = getNode(s);
     Node actualNode = findActualNode(node, k);
     int mod = actualNode.text.length() + Integer.valueOf(actualNode.previous.numberOfBoarder.toString());
-    int currentPosition = k % (mod + 1);
+    int currentPosition = (k - 1) % mod;
     char resultChar = findText(actualNode, currentPosition);
 
     String result = String.valueOf(resultChar);
     return result;
-//    return "String.valueOf(result)";
   }
 
   private char findText(Node actualNode, int currentPosition) {
-    if (actualNode.previous.numberOfBoarder.compareTo(BigInteger.valueOf(currentPosition)) >= 0) {
+    if (actualNode.previous.numberOfBoarder.compareTo(BigInteger.valueOf(currentPosition)) > 0) {
       findText(actualNode.previous, currentPosition);
     } else {
       int position = currentPosition - Integer.valueOf(actualNode.previous.numberOfBoarder.toString());
-      return actualNode.text.toCharArray()[position - 1];
+      return actualNode.text.toCharArray()[position];
     }
 
     return 0;
   }
 
   private Node findActualNode(Node node, int k) {
-    if (node.previous.numberOfBoarder.compareTo(BigInteger.valueOf(k)) < 1) {
+    if (node.previous.numberOfBoarder.compareTo(BigInteger.valueOf(k)) < 0) {
       return node;
     } else {
       return findActualNode(node.previous, k);
@@ -104,10 +103,11 @@ The 1st letter is "a".*/
   public static void main(String[] args) {
     Solution sol = new Solution();
 //    String result = sol.decodeAtIndex("123lee2code344", 9);
+//    String result = sol.decodeAtIndex("leet2code3", 1);
 //    String result = sol.decodeAtIndex("leet2code3", 10);
-    String result = sol.decodeAtIndex("ha22", 6);
-//    String result = sol.decodeAtIndex("a2b3", 3);
-//    String result = sol.decodeAtIndex("le2l", 3);
+//    String result = sol.decodeAtIndex("ha22", 5);
+    String result = sol.decodeAtIndex("a2b3c4d5e6f7g8h9", 9);
     System.out.println(result);
   }
+
 }
