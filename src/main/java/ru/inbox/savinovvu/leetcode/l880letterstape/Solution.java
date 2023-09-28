@@ -1,84 +1,37 @@
 package ru.inbox.savinovvu.leetcode.l880letterstape;
 
-import java.math.BigInteger;
-
 class Solution {
 
-  public String decodeAtIndex(String s, int k) {
-    Node node = getNode(s);
-    Node actualNode = findActualNode(node, k);
-    int mod = actualNode.text.length() + Integer.valueOf(actualNode.previous.numberOfBoarder.toString());
-    int currentPosition = (k - 1) % mod;
-    char resultChar = findText(actualNode, currentPosition);
+  public static String decodeAtIndex(String s, int k) {
+    long size = 0;
+    int length = s.length();
 
-    String result = String.valueOf(resultChar);
-    return result;
-  }
-
-  private char findText(Node actualNode, int currentPosition) {
-    if (actualNode.previous.numberOfBoarder.compareTo(BigInteger.valueOf(currentPosition)) > 0) {
-      findText(actualNode.previous, currentPosition);
-    } else {
-      int position = currentPosition - Integer.valueOf(actualNode.previous.numberOfBoarder.toString());
-      return actualNode.text.toCharArray()[position];
-    }
-
-    return 0;
-  }
-
-  private Node findActualNode(Node node, int k) {
-    if (node.previous.numberOfBoarder.compareTo(BigInteger.valueOf(k)) < 0) {
-      return node;
-    } else {
-      return findActualNode(node.previous, k);
-    }
-
-  }
-
-  private static Node getNode(String s) {
-    String s1 = s.replaceAll("^\\d+", "");
-
-//    ArrayList<Node> nodes = new ArrayList<>();
-    Node node = new Node("", BigInteger.ZERO, BigInteger.ONE, null);
-    BigInteger multiplier = BigInteger.ONE;
-    StringBuilder tmpS = new StringBuilder();
-    for (Character character : s1.toCharArray()) {
-      if (Character.isDigit(character)) {
-        multiplier = multiplier.multiply(BigInteger.valueOf(Long.valueOf(character.toString())));
+    // Первый проход: определить размер расшифрованной строки
+    for (int i = 0; i < length; ++i) {
+      char c = s.charAt(i);
+      if (Character.isDigit(c)) {
+        size *= c - '0';
       } else {
-        if (multiplier.compareTo(BigInteger.ONE) > 0) {
-          node = addNode(node, multiplier, tmpS.toString());
-          multiplier = BigInteger.ONE;
-          tmpS = new StringBuilder();
-        }
-        tmpS.append(character);
+        size++;
       }
     }
-    if (!tmpS.toString().equals("")) {
-      node = addNode(node, multiplier, tmpS.toString());
+
+    // Второй проход: найти k-й символ, идя в обратном порядке
+    for (int i = length - 1; i >= 0; --i) {
+      char c = s.charAt(i);
+      k %= size;
+      if (k == 0 && Character.isLetter(c)) {
+        return Character.toString(c);
+      }
+
+      if (Character.isDigit(c)) {
+        size /= c - '0';
+      } else {
+        size--;
+      }
     }
-    return node;
-  }
 
-  private static Node addNode(Node lastNode, BigInteger multiplier, String currentString) {
-    BigInteger border = lastNode.numberOfBoarder.add(BigInteger.valueOf(currentString.length())).multiply(multiplier);
-    return new Node(currentString, border, multiplier, lastNode);
-  }
-
-  public static class Node {
-
-    public String text = "";
-    public BigInteger numberOfBoarder = BigInteger.ZERO;
-    public BigInteger multiplier = BigInteger.ONE;
-
-    public Node previous;
-
-    public Node(String s, BigInteger numberOfBoarder, BigInteger multiplier, Node c) {
-      this.text = s;
-      this.numberOfBoarder = numberOfBoarder;
-      this.multiplier = multiplier;
-      this.previous = c;
-    }
+    return null;
   }
 
 
@@ -102,12 +55,16 @@ Explanation: The decoded string is "a" repeated 8301530446056247680 times.
 The 1st letter is "a".*/
   public static void main(String[] args) {
     Solution sol = new Solution();
-//    String result = sol.decodeAtIndex("123lee2code344", 9);
 //    String result = sol.decodeAtIndex("leet2code3", 1);
 //    String result = sol.decodeAtIndex("leet2code3", 10);
 //    String result = sol.decodeAtIndex("ha22", 5);
-    String result = sol.decodeAtIndex("a2b3c4d5e6f7g8h9", 9);
+//    String result = sol.decodeAtIndex("a2b3c4d5e6f7g8h9", 9);
+//    String result = sol.decodeAtIndex("vk6u5xhq9v", 554);
+//    String result = sol.decodeAtIndex("vk6u5xhq9v", 9);
+    String result = sol.decodeAtIndex("l3mtm5weq7ki78c7hck4", 165511);
     System.out.println(result);
   }
-
+//"l3mtm5weq7ki78c7hck4"
+//  k =
+//      165511
 }
