@@ -6,7 +6,10 @@ import java.util.Stack;
 class Solution {
 
   public static void main(String[] args) {
-    ListNode node = new Solution().addTwoNumbers(new ListNode(9), new ListNode(9));
+    ListNode node = new Solution().addTwoNumbers(
+        new ListNode(2, new ListNode(4, new ListNode(3))),
+        new ListNode(5, new ListNode(6, new ListNode(4))));
+
     System.out.println(node);
   }
 
@@ -48,20 +51,21 @@ class Solution {
         isTen = false;
       }
 
-      stack.push(sum);
+      stack.push(sum % 10);
+    }
+
+    if (isTen) {
+      stack.push(1);
     }
 
     Integer first = stack.pop();
 
     ListNode node = new ListNode(first);
-    while (true) {
+    while (!stack.isEmpty()) {
       Integer digit = stack.pop();
-      if (digit == null) {
-        break;
-      }
+
       node = new ListNode(digit, node);
     }
-
 
     return node;
   }
