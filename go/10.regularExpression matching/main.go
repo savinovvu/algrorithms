@@ -5,7 +5,8 @@ import "fmt"
 func main() {
 	s := "aa"
 	p := "a*"
-	fmt.Printf("Does the string '%s' match the pattern '%s'? %v\n", s, p, isMatch(s, p))
+	match := isMatch(s, p)
+	fmt.Printf("Does the string '%s' match the pattern '%s'? %v\n", s, p, match)
 }
 
 func isMatch(s string, p string) bool {
