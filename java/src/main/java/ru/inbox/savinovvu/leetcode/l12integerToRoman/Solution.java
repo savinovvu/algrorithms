@@ -1,10 +1,9 @@
 package ru.inbox.savinovvu.leetcode.l12integerToRoman;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 class Solution {
+
+  private static final int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+  private static final String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
   public static void main(String[] args) {
     String s = new Solution().intToRoman(9);
@@ -12,31 +11,13 @@ class Solution {
   }
 
   public String intToRoman(int num) {
-    Map<Integer, String> romanToNum = new LinkedHashMap<>();
-    romanToNum.put(1000, "M");
-    romanToNum.put(900, "CM");
-    romanToNum.put(500, "D");
-    romanToNum.put(400, "CD");
-    romanToNum.put(100, "C");
-    romanToNum.put(90, "XC");
-    romanToNum.put(50, "L");
-    romanToNum.put(40, "XL");
-    romanToNum.put(10, "X");
-    romanToNum.put(9, "IX");
-    romanToNum.put(5, "V");
-    romanToNum.put(4, "IV");
-    romanToNum.put(1, "I");
-
     StringBuilder sb = new StringBuilder();
-    for (Entry<Integer, String> entry : romanToNum.entrySet()) {
-      Integer key = entry.getKey();
-      while (num - key >= 0) {
-        sb.append(entry.getValue());
-        num = num - key;
+    for (int i = 0; i < values.length && num >= 0; i++) {
+      while (values[i] <= num) {
+        num -= values[i];
+        sb.append(symbols[i]);
       }
-
     }
-
     return sb.toString();
   }
 }
