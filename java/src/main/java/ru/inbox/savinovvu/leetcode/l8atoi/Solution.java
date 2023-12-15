@@ -1,7 +1,5 @@
 package ru.inbox.savinovvu.leetcode.l8atoi;
 
-import java.math.BigInteger;
-
 class Solution {
 
   public static void main(String[] args) {
@@ -9,62 +7,43 @@ class Solution {
     System.out.println(i);
   }
 
-  public int myAtoi(String s) {
-    if (s.isBlank()) {
-      return 0;
-    }
-    String trim = s.trim();
-    StringBuilder result = new StringBuilder();
-    char[] charArray = trim.toCharArray();
-    int startIndex = 0;
-    char c = charArray[0];
-    if (c == '+') {
-      startIndex = 1;
-    }
-    if (c == '-') {
-      startIndex = 1;
-      result.append("-");
-    }
-
-    if (startIndex  == charArray.length ) {
+  public int myAtoi(String str) {
+    if (str == null || str.length() < 1) {
       return 0;
     }
 
-    for (int i = startIndex; i < charArray.length; i++) {
-      char ch = charArray[i];
-      if (Character.isDigit(ch) && Character.getNumericValue(ch) == 0) {
-        startIndex++;
-        continue;
-      }
-      break;
-    }
-    if (startIndex  == charArray.length ) {
+    str = str.trim();
+    if (str.length() == 0) {
       return 0;
     }
 
-    if (!Character.isDigit(charArray[startIndex])) {
-      return 0;
+    char flag = '+';
+    int i = 0;
+
+    if (str.charAt(0) == '-') {
+      flag = '-';
+      i++;
+    } else if (str.charAt(0) == '+') {
+      i++;
     }
 
-    for (int i = startIndex; i < charArray.length; i++) {
-      char ch = charArray[i];
-      if (Character.isDigit(ch)) {
-        result.append(ch);
-        continue;
-      }
-      break;
+    double result = 0;
+    while (str.length() > i && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+      result = result * 10 + (str.charAt(i) - '0');
+      i++;
     }
-    BigInteger bigInteger = new BigInteger(result.toString());
-    BigInteger max = BigInteger.valueOf(Integer.MAX_VALUE);
-    BigInteger min = BigInteger.valueOf(Integer.MIN_VALUE);
 
-    if (bigInteger.compareTo(max) > 0) {
+    if (flag == '-') {
+      result = -result;
+    }
+
+    if (result > Integer.MAX_VALUE) {
       return Integer.MAX_VALUE;
     }
-    if (bigInteger.compareTo(min) < 0) {
+    if (result < Integer.MIN_VALUE) {
       return Integer.MIN_VALUE;
     }
 
-    return Integer.valueOf(result.toString());
+    return (int) result;
   }
 }
