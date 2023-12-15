@@ -7,5 +7,5 @@
 [codeforces.com](leetcode.com)
 
 java -> go -> kotlin -> python -> scala -> elixir
-16 ->   2 ->  1 ->   15     -> 12 -> elixir
+16 ->   2 ->  1 ->      15     -> 12 -   > elixir
 
