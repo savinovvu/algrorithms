@@ -5,6 +5,8 @@ plugins {
 	id 'checkstyle'
 	id 'io.spring.dependency-management' version '1.1.0'
     id "org.openrewrite.rewrite" version "5.35.0"
+    id 'scala'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
 }
 
 group = 'com.example'
@@ -26,6 +28,7 @@ application {
 }
 
 dependencies {
+    implementation 'org.scala-lang:scala-library:2.13.3'
 	implementation 'org.springframework.boot:spring-boot-starter'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
