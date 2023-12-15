@@ -6,4 +6,6 @@
 
 [codeforces.com](leetcode.com)
 
+java -> go -> kotlin -> python -> scala -> elixir
+1436 -> 1 -> 1464 -> 12 -> scala -> elixir
 
