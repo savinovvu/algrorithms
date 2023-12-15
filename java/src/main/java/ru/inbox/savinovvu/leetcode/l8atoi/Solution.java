@@ -1,76 +1,70 @@
 package ru.inbox.savinovvu.leetcode.l8atoi;
 
+import java.math.BigInteger;
+
 class Solution {
 
   public static void main(String[] args) {
-    int i = new Solution().myAtoi("0032");
+    int i = new Solution().myAtoi("-003200000000000000000000000000000000000asd00");
     System.out.println(i);
   }
 
   public int myAtoi(String s) {
-    char[] charArray = s.toCharArray();
-    long result = 0;
-    boolean isPositive = true;
-    char previous = '0';
-    for (int i = charArray.length - 1; i > 0; i--) {
-      char ch = charArray[i];
-      int extracted = extracted(ch, previous);
-      previous = ch;
-      if (extracted == -1) {
-        isPositive = false;
-        continue;
-      }
-      if (extracted == -2) {
-        result = 0;
-        continue;
-      }
-      result = result + extracted * (long) Math.pow(10, i);
+    if (s.isBlank()) {
+      return 0;
     }
-    if (!isPositive) {
-      result = result * -1;
+    String trim = s.trim();
+    StringBuilder result = new StringBuilder();
+    char[] charArray = trim.toCharArray();
+    int startIndex = 0;
+    char c = charArray[0];
+    if (c == '+') {
+      startIndex = 1;
+    }
+    if (c == '-') {
+      startIndex = 1;
+      result.append("-");
     }
 
-    if (result > Integer.MAX_VALUE) {
+    if (startIndex  == charArray.length ) {
+      return 0;
+    }
+
+    for (int i = startIndex; i < charArray.length; i++) {
+      char ch = charArray[i];
+      if (Character.isDigit(ch) && Character.getNumericValue(ch) == 0) {
+        startIndex++;
+        continue;
+      }
+      break;
+    }
+    if (startIndex  == charArray.length ) {
+      return 0;
+    }
+
+    if (!Character.isDigit(charArray[startIndex])) {
+      return 0;
+    }
+
+    for (int i = startIndex; i < charArray.length; i++) {
+      char ch = charArray[i];
+      if (Character.isDigit(ch)) {
+        result.append(ch);
+        continue;
+      }
+      break;
+    }
+    BigInteger bigInteger = new BigInteger(result.toString());
+    BigInteger max = BigInteger.valueOf(Integer.MAX_VALUE);
+    BigInteger min = BigInteger.valueOf(Integer.MIN_VALUE);
+
+    if (bigInteger.compareTo(max) > 0) {
       return Integer.MAX_VALUE;
     }
-    if (result < Integer.MIN_VALUE) {
+    if (bigInteger.compareTo(min) < 0) {
       return Integer.MIN_VALUE;
     }
 
-    return (int) result;
-  }
-
-  private static int extracted(char ch, char previous) {
-    boolean isPositive;
-    switch (ch) {
-      case '-':
-        return -1;
-      case '0':
-        return 0;
-      case '1':
-        return 1;
-      case '2':
-        return 2;
-      case '3':
-        return 3;
-      case '4':
-        return 4;
-      case '5':
-        return 5;
-      case '6':
-        return 6;
-      case '7':
-        return 7;
-      case '8':
-        return 8;
-      case '9':
-        return 9;
-      case ' ':
-        return -2;
-      case '+':
-        return -2;
-      default:
-        return -3;
-    }
+    return Integer.valueOf(result.toString());
   }
 }
