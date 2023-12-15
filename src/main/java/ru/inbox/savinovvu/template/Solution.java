@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.template;
+package ru.inbox.savinovvu.template;
 
 class Solution {
 
