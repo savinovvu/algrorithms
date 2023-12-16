@@ -1,7 +1,6 @@
 package ru.inbox.savinovvu.leetcode.l242validanagram;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 class Solution {
 
@@ -19,27 +18,13 @@ class Solution {
   }
 
   public boolean isAnagram(String s, String t) {
-    Map<Character, Integer> map = new HashMap<>();
-    char[] sChars = s.toCharArray();
-    for (int i = 0; i < sChars.length; i++) {
-      char ch = sChars[i];
-      map.merge(ch, 1, Integer::sum);
+    if (s.length() != t.length()) {
+      return false;
     }
-    for (Character ch : t.toCharArray()) {
-      if (map.isEmpty()) {
-        return false;
-      }
-      boolean isContain = map.containsKey(ch);
-      if (isContain) {
-        Integer sum = map.merge(ch, 1, (current, v) -> current - v);
-        if (sum == 0) {
-          map.remove(ch);
-        }
-      } else {
-        return false;
-      }
-    }
-
-    return map.isEmpty();
+    char[] str1 = s.toCharArray();
+    char[] str2 = t.toCharArray();
+    Arrays.sort(str1);
+    Arrays.sort(str2);
+    return Arrays.equals(str1, str2);
   }
 }
