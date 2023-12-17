@@ -44,31 +44,19 @@ public class Solution {
   }
 
   public ListNode removeNthFromEnd(ListNode head, int n) {
-    if (head.next == null && n == 1) {
-      return null;
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode first = dummy;
+    ListNode second = dummy;
+    for (int i = 1; i <= n + 1; i++) {
+      first = first.next;
     }
-    int i = 0;
-
-    ListNode last = head;
-    ListNode pointer = head;
-    while (pointer != null) {
-      pointer = pointer.next;
-      i++;
-      if (i - 1 > n) {
-        last = last.next;
-      }
+    while (first != null) {
+      first = first.next;
+      second = second.next;
     }
-    if (n == 1) {
-      last.next = null;
-    } else if (i == n) {
-      last = last.next;
-      return last;
-    } else {
-      ListNode next = last.next.next;
-      last.next = next;
-    }
-
-    return head;
+    second.next = second.next.next;
+    return dummy.next;
   }
 
 
