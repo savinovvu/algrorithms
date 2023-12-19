@@ -2,10 +2,8 @@ package ru.inbox.savinovvu.leetcode.l841;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 public class Solution {
 
@@ -21,19 +19,28 @@ public class Solution {
 
 
   public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-    HashSet<Integer> keys = new HashSet<>();
-    keys.add(0);
-    Deque<Integer> deque = new LinkedList<>(Arrays.asList(0));
+    int n = rooms.size();
+    boolean[] visited = new boolean[n];
+    visited[0] = true;
 
-    while (!deque.isEmpty()) {
-      Integer pop = deque.pop();
-      for ( Integer roomKey : rooms.get(pop)) {
-        if (!keys.contains(roomKey)) {
-          keys.add(roomKey);
-          deque.add(roomKey);
+    Stack<Integer> stack = new Stack<>();
+    stack.push(0);
+
+    while (!stack.isEmpty()) {
+      int room = stack.pop();
+      for (int key : rooms.get(room)) {
+        if (!visited[key]) {
+          visited[key] = true;
+          stack.push(key);
         }
       }
     }
-    return rooms.size() == keys.size();
+
+    for (boolean visit : visited) {
+      if (!visit) {
+        return false;
+      }
+    }
+    return true;
   }
 }
