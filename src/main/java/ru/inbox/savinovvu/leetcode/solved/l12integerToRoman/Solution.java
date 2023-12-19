@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l12integerToRoman;
+package ru.inbox.savinovvu.leetcode.solved.l12integerToRoman;
 
 class Solution {
 

@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l8atoi;
+package ru.inbox.savinovvu.leetcode.solved.l8atoi;
 
 class Solution {
 

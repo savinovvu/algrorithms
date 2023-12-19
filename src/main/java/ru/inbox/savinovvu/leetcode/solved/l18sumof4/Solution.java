@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l18sumof4;
+package ru.inbox.savinovvu.leetcode.solved.l18sumof4;
 
 import java.util.ArrayList;
 import java.util.Arrays;

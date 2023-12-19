@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l802;
+package ru.inbox.savinovvu.leetcode.solved.l802;
 
 import java.util.List;
 import java.util.stream.IntStream;

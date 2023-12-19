@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l16sum3closest;
+package ru.inbox.savinovvu.leetcode.solved.l16sum3closest;
 
 import java.util.Arrays;
 

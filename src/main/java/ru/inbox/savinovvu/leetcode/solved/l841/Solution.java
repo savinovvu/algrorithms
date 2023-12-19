@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l841;
+package ru.inbox.savinovvu.leetcode.solved.l841;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l547;
+package ru.inbox.savinovvu.leetcode.solved.l547;
 
 public class Solution {
 

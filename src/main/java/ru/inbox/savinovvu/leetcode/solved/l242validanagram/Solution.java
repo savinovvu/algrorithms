@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l242validanagram;
+package ru.inbox.savinovvu.leetcode.solved.l242validanagram;
 
 import java.util.Arrays;
 

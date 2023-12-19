@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l17letterphonenumber;
+package ru.inbox.savinovvu.leetcode.solved.l17letterphonenumber;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l1436destinationcity;
+package ru.inbox.savinovvu.leetcode.solved.l1436destinationcity;
 
 import java.util.ArrayList;
 import java.util.Arrays;

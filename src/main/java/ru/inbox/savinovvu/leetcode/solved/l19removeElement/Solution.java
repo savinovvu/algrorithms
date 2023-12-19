@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l19removeElement;
+package ru.inbox.savinovvu.leetcode.solved.l19removeElement;
 
 public class Solution {
 
