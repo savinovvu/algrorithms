@@ -30,42 +30,22 @@ public class Solution {
 
   public List<Integer> eventualSafeNodes(int[][] graph) {
     int[] nodes = new int[graph.length];
-    for (int i = 0; i < nodes.length; i++) {
-      if (nodes[i] == 0) {
-        dfs(graph, nodes, i);
-      }
-    }
-    List<Integer> list = IntStream.range(0, nodes.length)
-        .filter(i -> nodes[i] == 2)
+    return IntStream.range(0, nodes.length)
+        .filter(i -> dfs(graph, nodes, i) == 2)
         .boxed().toList();
-
-    return list;
   }
 
-  private void dfs(int[][] graph, int[] nodes, int i) {
-    int[] neighbours = graph[i];
-
-    if (neighbours.length == 0) {
-      nodes[i] = 2;
-      return;
+  private int dfs(int[][] graph, int[] nodes, int i) {
+    if (nodes[i] > 0) {
+      return nodes[i];
     }
-
     nodes[i] = 1;
-    for (int j = 0; j < neighbours.length; j++) {
-      int neighbour = neighbours[j];
-      int statement = nodes[neighbour];
-      if (statement == 1) {
-        nodes[neighbour] = 1;
-        return;
-      }
-      if (statement == 0) {
-        dfs(graph, nodes, neighbour);
-        if (nodes[neighbour] == 1) {
-          return;
-        }
+    for (int neighbour : graph[i]) {
+      if (dfs(graph, nodes, neighbour) == 1) {
+        return 1;
       }
     }
-    nodes[i] = 2;
+    return nodes[i] = 2;
   }
 
 }
