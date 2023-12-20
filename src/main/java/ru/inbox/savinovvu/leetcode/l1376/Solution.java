@@ -1,6 +1,7 @@
 package ru.inbox.savinovvu.leetcode.l1376;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,17 +42,66 @@ public class Solution {
 
   public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
     Map<Integer, List<Integer>> map = new HashMap<>();
-    IntStream.range(0, n).forEach(i -> map.computeIfAbsent(manager[i], x -> new ArrayList<>()).add(i));
-    return dfs(headID, map, informTime);
+    for (int i = 0; i < manager.length; i++) {
+      int bossId = manager[i];
+      map.merge(bossId, new ArrayList<>(Arrays.asList(i)), (oV, nV) -> {
+            oV.addAll(nV);
+            return oV;
+          }
+      );
+    }
+    int result = dfs(headID, map, informTime);
+
+    return result;
   }
-  public int dfs(int headId, Map<Integer, List<Integer>> map, int[] informTime) {
+
+  public int dfs(int headId, Map<Integer, List<Integer>> map,  int[] informTime) {
+    int selfTime = informTime[headId];
+    List<Integer> employers = map.getOrDefault(headId, new ArrayList<>());
+
+    int employersMaxTime = 0;
+    for (Integer employerId : employers) {
+      int time = dfs(employerId, map, informTime);
+      if (employersMaxTime < time) {
+        employersMaxTime = time;
+      }
+    }
+    return selfTime + employersMaxTime;
+  }
+
+// ===========================
+public int numOfMinutes2(int n, int headID, int[] manager, int[] informTime) {
+  List<Integer>[] graph = new ArrayList[n];
+  for (int i = 0; i < n; ++i)
+    graph[i] = new ArrayList<>();
+  for (int i = 0; i < n; ++i)
+    if (manager[i] != -1)
+      graph[manager[i]].add(i);
+  return dfs2(headID, informTime, graph);
+}
+
+  private int dfs2(int src, int[] informTime, List<Integer>[] graph) {
+    int max = 0;
+    for (int i = 0; i < graph[src].size(); ++i)
+      max = Math.max(max, dfs2(graph[src].get(i), informTime, graph));
+    return max + informTime[src];
+  }
+
+//  ==================================
+
+
+  public int numOfMinutes3(int n, int headID, int[] manager, int[] informTime) {
+    Map<Integer, List<Integer>> map = new HashMap<>();
+    IntStream.range(0, n).forEach(i -> map.computeIfAbsent(manager[i], x -> new ArrayList<>()).add(i));
+    return dfs3(headID, map, informTime);
+  }
+  public int dfs3(int headId, Map<Integer, List<Integer>> map, int[] informTime) {
     return informTime[headId] +
         map.getOrDefault(headId, new ArrayList<>())
             .stream()
-            .mapToInt(i -> dfs(i, map, informTime))
+            .mapToInt(i -> dfs3(i, map, informTime))
             .max()
             .orElse(0);
   }
-
 
 }
