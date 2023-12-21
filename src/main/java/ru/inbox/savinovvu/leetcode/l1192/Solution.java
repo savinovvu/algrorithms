@@ -19,48 +19,59 @@ public class Solution {
     System.out.println(result);
   }
 
+
+  private int time = 0; // время, когда каждая вершина была обнаружена
+
   public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
-    List<Integer>[] connectionList = new ArrayList[n];
-
-    for (int i = 0; i < n; i++) {
-      connectionList[i] = new ArrayList<>();
-    }
-
-    for (List<Integer> conn : connections) {
-      connectionList[conn.get(0)].add(conn.get(1));
-      connectionList[conn.get(1)].add(conn.get(0));
-    }
-
+    int[] disc = new int[n], low = new int[n];
+    // использование списка смежности вместо матрицы сэкономит некоторую память, матрица смежности вызовет MLE
+    List<Integer>[] graph = new ArrayList[n];
     List<List<Integer>> res = new ArrayList<>();
-    for (List<Integer> pair : connections) {
-      int time = 0;
-      int[] lowLink = new int[n];
-      boolean[] visited = new boolean[n];
-      int[] visitTime = new int[n];
-      boolean b = !visited[pair.get(0)] && hasCycle(pair.get(0), pair.get(1), lowLink, visited, time, connectionList, visitTime);
-      if (!b) {
-        res.add(pair);
+    Arrays.fill(disc, -1); // используем disc для хранения времени обнаружения
+    Arrays.fill(low, -1); // используем low для хранения самой низкой вершины
+
+    // строим граф
+    for (int i = 0; i < n; i++) {
+      graph[i] = new ArrayList<>();
+    }
+
+    // добавляем ребра
+    for (int i = 0; i < connections.size(); i++) {
+      int from = connections.get(i).get(0), to = connections.get(i).get(1);
+      graph[from].add(to);
+      graph[to].add(from);
+    }
+
+    // запускаем DFS для каждой вершины
+    for (int i = 0; i < n; i++) {
+      if (disc[i] == -1) {
+        dfs(i, low, disc, graph, res, i);
       }
     }
     return res;
   }
 
-  private boolean hasCycle(int point, int parent, int[] lowLink, boolean[] visited, int time, List<Integer>[] connectionList,
-      int[] visitTime) {
-
-    visited[point] = true;
-    visitTime[point] = lowLink[point] = time++;
-
-    for (Integer neighbour : connectionList[point]) {
-      if (!visited[neighbour]) {
-        if (hasCycle(neighbour, point, lowLink, visited, time, connectionList, visitTime)) {
-          return true;
+  private void dfs(int u, int[] low, int[] disc, List<Integer>[] graph, List<List<Integer>> res, int pre) {
+    disc[u] = low[u] = ++time; // обнаруживаем u
+    for (int j = 0; j < graph[u].size(); j++) {
+      int v = graph[u].get(j);
+      if (v == pre) {
+        continue; // если родительская вершина, игнорируем
+      }
+      if (disc[v] == -1) { // если не обнаружено
+        dfs(v, low, disc, graph, res, u);
+        low[u] = Math.min(low[u], low[v]);
+        if (low[v] > disc[u]) {
+          // u - v критический, нет пути для v, чтобы вернуться к u или предыдущим вершинам u
+          res.add(Arrays.asList(u, v));
         }
-        lowLink[point] = Math.min(lowLink[point], lowLink[neighbour]);
-      } else if (neighbour != parent) {
-        lowLink[point] = Math.min(lowLink[point], visitTime[neighbour]);
+      } else { // если v обнаружено и не является родительским
+        low[u] = Math.min(low[u], disc[v]);
       }
     }
-    return false;
   }
 }
+
+
+
+ЯЯ
