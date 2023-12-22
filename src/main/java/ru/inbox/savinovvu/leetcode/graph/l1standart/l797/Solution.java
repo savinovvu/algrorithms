@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l797;
+package ru.inbox.savinovvu.leetcode.graph.l1standart.l797;
 
 import java.util.ArrayList;
 import java.util.Arrays;

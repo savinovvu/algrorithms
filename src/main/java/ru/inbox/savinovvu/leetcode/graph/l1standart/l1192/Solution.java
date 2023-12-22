@@ -1,4 +1,4 @@
-package ru.inbox.savinovvu.leetcode.l1192;
+package ru.inbox.savinovvu.leetcode.graph.l1standart.l1192;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,7 +71,3 @@ public class Solution {
     }
   }
 }
-
-
-
-ЯЯ
