@@ -26,7 +26,8 @@ class Solution {
     int start = 0;
     int end = 0;
     for (int i = 0; i < S.length(); i++) {
-      end = Math.max(end, arr[S.charAt(i) - 'a']);
+      int pos = arr[S.charAt(i) - 'a'];
+      end = Math.max(end, pos);
       if (i == end) {
         partitions.add(end - start + 1);
         start = end + 1;
